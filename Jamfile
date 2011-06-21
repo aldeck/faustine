@@ -1,0 +1,26 @@
+SubDir HAIKU_TOP src apps faustine ;
+
+SEARCH_SOURCE += [ FDirName $(SUBDIR) audio ] ;
+SEARCH_SOURCE += [ FDirName $(SUBDIR) ui ] ;
+
+UsePrivateHeaders shared ;
+
+Application Faustine :
+	App.cpp
+		
+	# audio
+	GenericAudioFilterNode.cpp
+	SoundUtils.cpp
+	
+	# dsp
+	#FirDSP.cpp
+	#KarplusDSP.cpp
+	
+	# ui
+	UIWindow.cpp
+	UIView.cpp
+	PeakView.cpp
+
+	: be media $(TARGET_LIBSUPC++)
+	: Faustine.rdef
+;
