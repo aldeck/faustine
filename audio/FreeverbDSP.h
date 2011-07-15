@@ -1,3 +1,9 @@
+/*
+ * Copyright 2009-2010, Alexandre Deckner (alex@zappotek.com)
+ * Distributed under the terms of the MIT License.
+ *
+ */
+
 //-----------------------------------------------------
 // copyright: "(c)GRAME 2006"
 // license: "BSD"
@@ -10,10 +16,12 @@
 #ifndef _FREEVERB_DSP_H
 #define _FREEVERB_DSP_H
 
+
 #include "FaustDSP.h"
 #include "FaustUI.h"
 
 #include <math.h>
+
 
 class FreeverbDSP : public FaustDSP {
   private:
@@ -86,7 +94,7 @@ class FreeverbDSP : public FaustDSP {
 	float 	fVec23[256];
 	float 	fRec24[2];
   public:
-	static void metadata(Meta* m) 	{ 
+	static void metadata(Meta* m) 	{
 		m->declare("copyright", "(c)GRAME 2006");
 		m->declare("license", "BSD");
 		m->declare("author", "Grame");
@@ -315,5 +323,6 @@ class FreeverbDSP : public FaustDSP {
 		}
 	}
 };
+
 
 #endif /* _FREEVERB_DSP_H */

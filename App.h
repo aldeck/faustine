@@ -1,21 +1,21 @@
 /*
- * Copyright 2008, Haiku Inc. All rights reserved.
+ * Copyright 2009-2010, Alexandre Deckner (alex@zappotek.com)
  * Distributed under the terms of the MIT License.
  *
- * Authors:
- * 		Alexandre Deckner <alex@zappotek.com>
  */
-
 #ifndef _APP_H
 #define _APP_H
 
+
 #include <Application.h>
+
 
 class BMediaNode;
 class BMediaRoster;
 class media_node;
 struct media_connection;
 class FaustDSP;
+
 
 class App: public BApplication {
 public:
@@ -33,11 +33,12 @@ protected:
 	//BWindow*		fMainWindow;
 	BMediaNode*		fMainMediaNode;
 	BMediaRoster*	fMediaRoster;
-	
+
 	media_connection* fMixerConnection;
 	media_connection* fPlayerConnection;
-	
+
 	FaustDSP*		fFaustDSP;
 };
+
 
 #endif /* _APP_H */

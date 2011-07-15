@@ -1,10 +1,9 @@
 /*
- * Copyright 2009, Haiku Inc. All rights reserved.
+ * Copyright 2009-2010, Alexandre Deckner (alex@zappotek.com)
  * Distributed under the terms of the MIT License.
  *
- * Authors:
- * 		Alexandre Deckner <alex@zappotek.com>
  */
+
 
 #include "UIView.h"
 
@@ -17,7 +16,6 @@
 #include <Window.h>
 
 #include <stdio.h>
-
 
 //test
 #include "KarplusDSP.h"
@@ -43,7 +41,7 @@ void
 UIView::AttachedToWindow()
 {
 	BView::AttachedToWindow();
-	
+
 	SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 	SetLowColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 	fCurrentLevelLayout = new BGroupLayout(B_VERTICAL);
@@ -54,7 +52,7 @@ UIView::AttachedToWindow()
 
 void
 UIView::Draw(BRect updateRect)
-{	
+{
 }
 
 
@@ -81,7 +79,7 @@ UIView::MessageReceived(BMessage *message)
 					*zone = 1.0;
 				//snooze(50000);
 				//*zone = 0.0;
-			}			
+			}
 			break;
 		}
 		case 'slid':
@@ -106,13 +104,13 @@ void
 UIView::addButton(const char* label, float* zone)
 {
 	if (Window()->Lock()) {
-		BMessage* buttonMessage = new BMessage('butt');	
+		BMessage* buttonMessage = new BMessage('butt');
 		buttonMessage->AddPointer("faust:zone_ptr", zone);
 		BButton* button = new BButton(BRect(0, 1, 80, 1), label, label, buttonMessage);
 		button->SetTarget(this);
 
 		fCurrentLevelLayout->AddView(button);
-		DoLayout();	
+		DoLayout();
 		Window()->Unlock();
 	}
 }
@@ -157,7 +155,7 @@ UIView::_addSlider(const char* label, float* zone, float start, float min,
 
 		fCurrentLevelLayout->AddView(slider);
 		DoLayout();
-		//printf("UIView::_addSlider('%s') view %p layout %p\n", label, fCurrentLevelLayout->View(), fCurrentLevelLayout);		
+		//printf("UIView::_addSlider('%s') view %p layout %p\n", label, fCurrentLevelLayout->View(), fCurrentLevelLayout);
 		Window()->Unlock();
 	}
 }
@@ -198,17 +196,17 @@ UIView::addVerticalBargraph(const char* label, float* zone, float min, float max
 void
 UIView::openTabBox(const char* label)
 {
-	
+
 	if (Window()->Lock()) {
 		if (fCurrentTabView == NULL) {
-			fCurrentTabView = new BTabView(label);			
+			fCurrentTabView = new BTabView(label);
 			//fCurrentTabView->SetExplicitMaxSize(BSize(B_SIZE_UNLIMITED, B_SIZE_UNLIMITED));
-			fCurrentLevelLayout->AddView(fCurrentTabView);						
+			fCurrentLevelLayout->AddView(fCurrentTabView);
 			//printf("UIView::openTabBox('%s') tabview %p layout %p\n", label, fCurrentTabView, fCurrentLevelLayout);
 			DoLayout();
-		} else 
+		} else
 			printf("UIView::openTabBox('%s') unimplemented, can't add a tabview in a tabview\n", label);
-		
+
 		Window()->Unlock();
 	}
 }
@@ -223,7 +221,7 @@ UIView::openHorizontalBox(const char* label)
 
 void
 UIView::openVerticalBox(const char* label)
-{	
+{
 	_openBox(label, B_VERTICAL);
 }
 
@@ -237,29 +235,29 @@ UIView::_openBox(const char* label, enum orientation orientation)
 			view->SetViewColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 			view->SetLowColor(ui_color(B_PANEL_BACKGROUND_COLOR));
 			view->SetExplicitMaxSize(BSize(B_SIZE_UNLIMITED, B_SIZE_UNLIMITED));
-			
+
 			fCurrentLevelLayout = new BGroupLayout(orientation);
 			fCurrentLevelLayout->SetInsets(8, 8, 8, 8);	// 16 to give space to the box label (unimplemented?)
 			view->SetLayout(fCurrentLevelLayout);
-			
-			fCurrentTabView->AddTab(view);	
-			//printf("UIView::_openBox('%s') tabmode tabview %p view %p layout %p\n", label, fCurrentTabView, view, fCurrentLevelLayout);		
-			
+
+			fCurrentTabView->AddTab(view);
+			//printf("UIView::_openBox('%s') tabmode tabview %p view %p layout %p\n", label, fCurrentTabView, view, fCurrentLevelLayout);
+
 		} else {
-		
+
 			BBox* box = new BBox(label);
-			box->SetLabel(label);			
-			
+			box->SetLabel(label);
+
 			BLayout* upperLevelLayout = fCurrentLevelLayout;
-			
+
 			fCurrentLevelLayout = new BGroupLayout(orientation);
 			fCurrentLevelLayout->SetInsets(8, 16, 8, 8);	// 16 to give space to the box label (unimplemented?)
 			box->SetLayout(fCurrentLevelLayout);
-			
+
 			upperLevelLayout->AddView(box);
-		
+
 		}
-		
+
 		DoLayout();
 		Window()->Unlock();
 	}
@@ -270,7 +268,7 @@ void
 UIView::closeBox()
 {
 	if (Window()->Lock()) {
-		if (fCurrentTabView != NULL) {			
+		if (fCurrentTabView != NULL) {
 			if (fCurrentLevelLayout != static_cast<BTwoDimensionalLayout*>(fCurrentTabView->Parent()->GetLayout())) {
 				fCurrentLevelLayout = static_cast<BTwoDimensionalLayout*>(fCurrentTabView->Parent()->GetLayout());
 				//printf("UIView::closeBox() tabmode fCurrentLevelLayout %p\n", fCurrentLevelLayout);
@@ -279,11 +277,11 @@ UIView::closeBox()
 				fCurrentTabView = NULL;
 				//printf("UIView::closeBox() closing tabmode fCurrentLevelLayout %p\n", fCurrentLevelLayout);
 			}
-			
+
 			//
 		} else {
-			fCurrentLevelLayout = static_cast<BTwoDimensionalLayout*>(fCurrentLevelLayout->View()->Parent()->GetLayout());	
-			//printf("UIView::closeBox() fCurrentLevelLayout %p\n", fCurrentLevelLayout);	
+			fCurrentLevelLayout = static_cast<BTwoDimensionalLayout*>(fCurrentLevelLayout->View()->Parent()->GetLayout());
+			//printf("UIView::closeBox() fCurrentLevelLayout %p\n", fCurrentLevelLayout);
 		}
 		DoLayout();
 		Window()->Unlock();

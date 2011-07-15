@@ -1,10 +1,9 @@
 /*
- * Copyright 2009, Haiku Inc. All rights reserved.
+ * Copyright 2009-2010, Alexandre Deckner (alex@zappotek.com)
  * Distributed under the terms of the MIT License.
  *
- * Authors:
- * 		Alexandre Deckner <alex@zappotek.com>
  */
+
 
 #include <Alert.h>
 #include <MediaRoster.h>

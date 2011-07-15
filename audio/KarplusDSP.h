@@ -1,11 +1,9 @@
-/* 
- * Copyright 2008, Haiku Inc. All rights reserved.
+/*
+ * Copyright 2009-2010, Alexandre Deckner (alex@zappotek.com)
  * Distributed under the terms of the MIT License.
  *
- * Authors:
- * 		Alexandre Deckner <alex@zappotek.com>
  */
- 
+
 //-----------------------------------------------------
 // copyright: "(c)GRAME 2006"
 // license: "BSD"
@@ -18,10 +16,12 @@
 #ifndef _KARPLUS_DSP_H
 #define _KARPLUS_DSP_H
 
+
 #include "FaustDSP.h"
 #include "FaustUI.h"
 
 #include <math.h>
+
 
 class KarplusDSP : public FaustDSP {
 //public:
@@ -40,7 +40,7 @@ class KarplusDSP : public FaustDSP {
 	FAUSTFLOAT 	fslider3;
 	float 	fRec0[3];
   public:
-	/*static void metadata(Meta* m) 	{ 
+	/*static void metadata(Meta* m) 	{
 		m->declare("copyright", "(c)GRAME 2006");
 		m->declare("license", "BSD");
 		m->declare("author", "Grame");
@@ -66,14 +66,14 @@ class KarplusDSP : public FaustDSP {
 		fslider3 = 128.0f;
 		for (int i=0; i<3; i++) fRec0[i] = 0;
 	}
-	
-	
+
+
 	virtual void init(int samplingFreq) {
 		classInit(samplingFreq);
 		instanceInit(samplingFreq);
 	}
-	
-	
+
+
 	virtual void buildUserInterface(FaustUI* interface) {
 		interface->openVerticalBox("karplus");
 		interface->openVerticalBox("excitator");
@@ -89,8 +89,8 @@ class KarplusDSP : public FaustDSP {
 		interface->closeBox();
 		interface->closeBox();
 	}
-	
-	
+
+
 	virtual void compute (int count, FAUSTFLOAT** input, FAUSTFLOAT** output){
 		float 	fSlow0 = (1.0f / fslider0);
 		float 	fSlow1 = fbutton0;
@@ -115,5 +115,6 @@ class KarplusDSP : public FaustDSP {
 	}
 
 };
+
 
 #endif /* _KARPLUS_DSP_H */

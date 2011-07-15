@@ -1,3 +1,9 @@
+/*
+ * Copyright 2009-2010, Alexandre Deckner (alex@zappotek.com)
+ * Distributed under the terms of the MIT License.
+ *
+ */
+
 //-----------------------------------------------------
 // copyright: "(c)GRAME 2006"
 // license: "BSD"
@@ -10,10 +16,12 @@
 #ifndef _PITCH_SHIFTER_DSP_H
 #define _PITCH_SHIFTER_DSP_H
 
+
 #include "FaustDSP.h"
 #include "FaustUI.h"
 
 #include <math.h>
+
 
 class PitchShifterDSP : public FaustDSP {
   private:
@@ -24,7 +32,7 @@ class PitchShifterDSP : public FaustDSP {
 	float 	fVec0[65536];
 	FAUSTFLOAT 	fslider2;
   public:
-	static void metadata(Meta* m) { 
+	static void metadata(Meta* m) {
 		m->declare("copyright", "(c)GRAME 2006");
 		m->declare("license", "BSD");
 		m->declare("author", "Grame");
@@ -79,5 +87,6 @@ class PitchShifterDSP : public FaustDSP {
 		}
 	}
 };
+
 
 #endif /* _PITCH_SHIFTER_DSP_H */

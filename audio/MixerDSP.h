@@ -1,11 +1,9 @@
-/* 
- * Copyright 2008, Haiku Inc. All rights reserved.
+/*
+ * Copyright 2009-2010, Alexandre Deckner (alex@zappotek.com)
  * Distributed under the terms of the MIT License.
  *
- * Authors:
- * 		Alexandre Deckner <alex@zappotek.com>
  */
- 
+
 //-----------------------------------------------------
 // copyright: "(c)GRAME 2006"
 // license: "BSD"
@@ -18,10 +16,12 @@
 #ifndef _MIXER_DSP_H
 #define _MIXER_DSP_H
 
+
 #include "FaustDSP.h"
 #include "FaustUI.h"
 
 #include <math.h>
+
 
 class MixerDSP : public FaustDSP {
   private:
@@ -77,7 +77,7 @@ class MixerDSP : public FaustDSP {
 	FAUSTFLOAT 	fslider8;
 	float 	fRec16[2];
   public:
-	static void metadata(Meta* m) 	{ 
+	static void metadata(Meta* m) 	{
 		m->declare("copyright", "(c) GRAME 2006");
 		m->declare("license", "BSD");
 		m->declare("author", "Grame");
